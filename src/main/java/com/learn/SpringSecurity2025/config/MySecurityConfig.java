@@ -1,5 +1,6 @@
 package com.learn.SpringSecurity2025.config;
 
+import com.learn.SpringSecurity2025.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ public class MySecurityConfig {
 
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private MyUserDetailsService myUserDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -41,7 +42,7 @@ public class MySecurityConfig {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
         provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(myUserDetailsService);
 
         return provider;
     }

@@ -3,13 +3,14 @@ spring:
     name: SpringSecurity2025
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/microservice
+    url: jdbc:postgresql://localhost:5432/security
     username: postgres
     password: postgres
 
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
     hibernate:
       ddl-auto: update
 

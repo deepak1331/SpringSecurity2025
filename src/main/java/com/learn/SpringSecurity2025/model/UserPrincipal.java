@@ -1,6 +1,8 @@
 package com.learn.SpringSecurity2025.model;
 
 import com.learn.SpringSecurity2025.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +13,7 @@ import java.util.List;
 
 public class UserPrincipal implements UserDetails {
 
-
+    private static final Logger log = LogManager.getLogger(UserPrincipal.class);
     private final User user;
 
     public UserPrincipal(User user) {
@@ -25,11 +27,13 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
+        log.debug("Password : {}", user.getPassword());
         return user.getPassword();
     }
 
     @Override
     public String getUsername() {
+        log.debug("Username : {}", user.getUsername());
         return user.getUsername();
     }
 
