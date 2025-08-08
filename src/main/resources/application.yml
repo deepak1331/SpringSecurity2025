@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: SpringSecurity2025
+
+  security:
+    user:
+      name: deepak
+      password: password
+      roles:
+        - ADMIN
+        - USER
