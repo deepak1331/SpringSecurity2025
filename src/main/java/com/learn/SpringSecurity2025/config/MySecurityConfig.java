@@ -7,6 +7,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -21,8 +26,20 @@ public class MySecurityConfig {
                         .authorizeHttpRequests(authorization -> authorization.anyRequest().authenticated())
                         //.formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults())
-                        .sessionManagement(session->
+                        .sessionManagement(session ->
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .build();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        UserDetails user1 = User.withDefaultPasswordEncoder()
+                .username("Avyaan").password("pass").roles("ADMIN", "USER").build();
+
+        UserDetails user2 = User.withDefaultPasswordEncoder()
+                .username("Shipra").password("pass").roles("ADMIN", "USER").build();
+
+        return new InMemoryUserDetailsManager(user1, user2);
     }
 }
