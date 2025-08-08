@@ -28,6 +28,7 @@ public class MySecurityConfig {
         return
                 httpSecurity
                         .csrf(AbstractHttpConfigurer::disable)
+                        .authorizeHttpRequests(authorization -> authorization.requestMatchers("/register").permitAll())
                         .authorizeHttpRequests(authorization -> authorization.anyRequest().authenticated())
                         //.formLogin(Customizer.withDefaults())
                         .httpBasic(Customizer.withDefaults())
