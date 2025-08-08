@@ -2,10 +2,10 @@ spring:
   application:
     name: SpringSecurity2025
 
-  security:
-    user:
-      name: deepak
-      password: pass
-      roles:
-        - ADMIN
-        - USER
+#  security:
+#    user:
+#      name: deepak
+#      password: pass
+#      roles:
+#        - ADMIN
+#        - USER
