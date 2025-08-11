@@ -3,7 +3,6 @@ package com.learn.SpringSecurity2025.service.impl;
 import com.learn.SpringSecurity2025.service.JwtService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.lang.Strings;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,10 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
@@ -34,6 +36,7 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
+        //claims.put("1", new Student(1, "Avyaan Yadav", 99));
 
         long currentTime = System.currentTimeMillis();
 
@@ -48,7 +51,9 @@ public class JwtServiceImpl implements JwtService {
                 .compact();
 
         //Hard coded JWT value
-        // return "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJMZWFybmluZ1NwcmluZ1NlY3VyaXR5IiwiVXNlcm5hbWUiOiJEZWVwYWsgWWFkYXYiLCJleHAiOjE3NTQ5OTgyNTIsImlhdCI6MTc1NDkxMTg1Mn0.e9fxuqWe2-FD147N0Tv_2cpH0CxeatGzSol7rztKmK0";
+        // return "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJMZWFybmluZ1NwcmluZ1NlY3VyaXR5I
+        // iwiVXNlcm5hbWUiOiJEZWVwYWsgWWFkYXYiLCJleHAiOjE3NTQ5OTgyNTIsImlhdCI6MTc1NDkxMTg1Mn0.e9fxuqWe2-
+        // FD147N0Tv_2cpH0CxeatGzSol7rztKmK0";
     }
 
 
