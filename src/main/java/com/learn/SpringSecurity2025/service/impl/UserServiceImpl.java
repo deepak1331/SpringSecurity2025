@@ -2,6 +2,7 @@ package com.learn.SpringSecurity2025.service.impl;
 
 import com.learn.SpringSecurity2025.entity.User;
 import com.learn.SpringSecurity2025.repo.UserRepository;
+import com.learn.SpringSecurity2025.service.JwtService;
 import com.learn.SpringSecurity2025.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtService jwtService;
+
     @Override
     public User save(User user) {
         log.debug("User Registration : {}", user);
@@ -35,6 +39,8 @@ public class UserServiceImpl implements UserService {
     public String verify(User user) {
         Authentication authenticator = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 user.getUsername(), user.getPassword()));
-        return authenticator.isAuthenticated() ? "Authentication Success": "Authentication Failed";
+        //return authenticator.isAuthenticated() ? "Authentication Success": "Authentication Failed";
+       return authenticator.isAuthenticated() ? jwtService.generateToken(user.getUsername()) : "Authentication Failed";
+
     }
 }
