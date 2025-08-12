@@ -1,5 +1,6 @@
 package com.learn.SpringSecurity2025.config;
 
+import com.learn.SpringSecurity2025.filter.JwtFilter;
 import com.learn.SpringSecurity2025.service.MyUserDetailsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,15 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.awt.event.WindowFocusListener;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @Log4j2
 public class MySecurityConfig {
 
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -40,6 +42,7 @@ public class MySecurityConfig {
                         .httpBasic(Customizer.withDefaults())
                         .sessionManagement(session ->
                                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                         .build();
     }
 
